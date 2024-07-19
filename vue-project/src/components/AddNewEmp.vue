@@ -19,7 +19,11 @@
       </div>
       <div class="form-group">
         <label for="grad">Grad:</label>
-        <input type="number" v-model="grad" id="grad" required>
+        <select v-model="grad" id="grad" required>
+          <option value="">Select--</option>
+          <option value="1">Grad</option>
+          <option value="2">Undergrad</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="image">Image:</label>
@@ -41,9 +45,8 @@ export default {
       phoneNumber: '',
       email: '',
       grad: '',
-      image: null ,
-      errorMessage: '' 
-
+      image: null,
+      errorMessage: ''
     };
   },
   methods: {
@@ -69,10 +72,10 @@ export default {
 
         const response = await axios.post('https://localhost:7129/api/Employees/AddEmployee', formData, config);
         console.log('Employee added:', response.data);
-        if(response.data==true){
+        if (response.data == true) {
           this.$router.push('/employeeList');
-        }else{
-          this.errorMessage="This User Is Added Previosly";
+        } else {
+          this.errorMessage = "This User Is Added Previously";
         }
       } catch (error) {
         console.error('Error adding employee:', error);
@@ -143,6 +146,14 @@ textarea {
   box-sizing: border-box;
 }
 
+select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
 button {
   width: 100%;
   padding: 10px;
@@ -157,6 +168,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 .error-message {
   color: red;
   text-align: center;

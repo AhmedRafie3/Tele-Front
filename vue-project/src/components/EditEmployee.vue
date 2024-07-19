@@ -19,7 +19,11 @@
       </div>
       <div class="form-group">
         <label for="grad">Grad:</label>
-        <input type="number" v-model="employee.grad" id="grad" required>
+        <select v-model="employee.grad" id="grad" required>
+          <option value="">Select--</option>
+          <option value="1">Grad</option>
+          <option value="2">Undergrad</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="image">Image:</label>
@@ -139,9 +143,9 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="number"],
 input[type="file"],
-textarea {
+textarea,
+select {
   width: calc(100% - 20px);
   padding: 10px;
   border: 1px solid #ccc;

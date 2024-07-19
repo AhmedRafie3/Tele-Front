@@ -21,7 +21,7 @@
           <td>{{ employee.name }}</td>
           <td>{{ employee.phoneNumber }}</td>
           <td>{{ employee.email }}</td>
-          <td>{{ employee.grad }}</td>
+          <td>{{ employee.grad==1?"Grad":"Undergrad" }}</td>
           <td v-if="canAddEmployee">
             <button @click="editEmployee(employee.id)">Edit</button>
             <button @click="deleteEmployee(employee.id)" class="delete-button">Delete</button>
