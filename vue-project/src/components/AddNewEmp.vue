@@ -26,6 +26,7 @@
         <input type="file" @change="onFileChange" id="image" required>
       </div>
       <button type="submit">Add Employee</button>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </form>
   </div>
 </template>
@@ -40,7 +41,9 @@ export default {
       phoneNumber: '',
       email: '',
       grad: '',
-      image: null 
+      image: null ,
+      errorMessage: '' 
+
     };
   },
   methods: {
@@ -66,7 +69,11 @@ export default {
 
         const response = await axios.post('https://localhost:7129/api/Employees/AddEmployee', formData, config);
         console.log('Employee added:', response.data);
-        this.$router.push('/employeeList');
+        if(response.data==true){
+          this.$router.push('/employeeList');
+        }else{
+          this.errorMessage="This User Is Added Previosly";
+        }
       } catch (error) {
         console.error('Error adding employee:', error);
       }
@@ -149,5 +156,10 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
 }
 </style>

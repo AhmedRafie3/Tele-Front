@@ -20,6 +20,7 @@
         </select>
       </div>
       <button type="submit">Register</button>
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </form>
   </div>
 </template>
@@ -32,7 +33,8 @@ export default {
     return {
       username: '',
       password: '',
-      userRole: ''  // Corrected the property name to userRole
+      userRole: '',
+      errorMessage: '' 
     };
   },
   methods: {
@@ -46,8 +48,12 @@ export default {
           userRole: parseInt(this.userRole)  
         });
         console.log('User registered:', response.data);
+        if(response.data==false){
+          this.errorMessage = 'Invalid username or password'; 
+        }else{
+          this.$router.push('/');
 
-        this.$router.push('/');
+        }
       } catch (error) {
         console.error('Registration error:', error);
       }
@@ -105,5 +111,10 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
